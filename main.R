@@ -1,0 +1,12 @@
+k <- 2
+XA <- matrix(c(5,10,3,3,12,6,4,13,3,7,11,4,9,12,5,8,14,9), nrow=6, byrow = TRUE)
+XB <- matrix(c(4,13,2,6,14,4,7,10,3,3,11,4,5,13,5,5,11,6), nrow=6, byrow = TRUE)
+n1 <- nrow(XA)
+n2 <- nrow(XB)
+S1 <- cov(XA)
+S2 <- cov(XB)
+S <- (1/((n1-1)+(n2-1)))*((n1-1)*S1+(n2-1)*S2)
+p <- nrow(S)
+M <- ((n1-1)+(n2-1))*log(det(S))-((n1-1)*log(det(S1))+(n2-1)*log(det(S2)))
+C <- 1-((2*p^2+3*p-1)/(6*(p+1)*(k-1)))*(((1/(n1-1))+(1/(n2-1)))-(1/((n1-1)+(n2-1))))
+M*C > qchisq(0.05,6, lower.tail = FALSE)
